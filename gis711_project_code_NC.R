@@ -128,19 +128,19 @@ raster2pgsql -s 5070 -I -C -M NLCD_2011_extract_proj.img -F -t "auto" | psql -d 
 
 # Connect to postgis database
 db.connect driver=pg database=gis711_project_5070
-db.login user=elyssa password=omgatcsm port=5432
+db.login user=elyssa password=password port=5432
 db.connect -p
 db.tables -p
 
 # Vector data
-v.external input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm" -l
-v.info map="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm"@OGR layer=nc_roads
+v.external input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password" -l
+v.info map="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password"@OGR layer=nc_roads
 
 g.region -a nsres=30 ewres=30 n=1690200 s=1341750 e=1838940 w=1054140
-v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm" layer=nc_roads_proj output=nc_roads type=line --overwrite
-v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm" layer=huc10_sub_proj_fix2 output=huc10_sub type=boundary --overwrite
-v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm" layer=nccities_20k_proj output=nccities_20k --overwrite
-v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm" layer=protectedlands_proj output=protectedlands --overwrite
+v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password" layer=nc_roads_proj output=nc_roads type=line --overwrite
+v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password" layer=huc10_sub_proj_fix2 output=huc10_sub type=boundary --overwrite
+v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password" layer=nccities_20k_proj output=nccities_20k --overwrite
+v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password" layer=protectedlands_proj output=protectedlands --overwrite
 # v.in.ogr input=nc_county_proj_fix.shp output=nc_county_proj_fix --overwrite
 
 # v.select ainput=nc_county_proj_fix atype=area binput=huc10_sub btype=area operator=overlap output=nc_county_sub --overwrite
@@ -150,15 +150,15 @@ v.in.ogr input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omg
 # v.overlay ainput=protectedlands atype=area binput=nc_county_sub operator=and output=protectedlands_sub --overwrite
 
 # Reading in raster dataa
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=elevation_proj mode=2" output="elevation"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=slope_proj mode=2" output="slope"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2001 mode=2" output="nlcd_2001"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2004_proj mode=2" output="nlcd_2004"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2011_proj mode=2" output="nlcd_2011"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2006_proj mode=2" output="nlcd_2006"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2013 mode=2" output="nlcd_2013"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2006_extract_proj mode=2" output="nlcd_2006_2"
-r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=nlcd_2011_extract_proj mode=2" output="nlcd_2011_2"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=elevation_proj mode=2" output="elevation"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=slope_proj mode=2" output="slope"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2001 mode=2" output="nlcd_2001"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2004_proj mode=2" output="nlcd_2004"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2011_proj mode=2" output="nlcd_2011"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2006_proj mode=2" output="nlcd_2006"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2013 mode=2" output="nlcd_2013"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2006_extract_proj mode=2" output="nlcd_2006_2"
+r.in.gdal input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=nlcd_2011_extract_proj mode=2" output="nlcd_2011_2"
 
 
 ###### FUTURES Simulation
@@ -426,9 +426,9 @@ r.report map=final_4 units=h,c,p --o
 # v.external.out input=PG:dbname=pgis_nc format=PostgreSQL
 #
 # db.tables -p
-# r.external.out directory="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=final mode=2" format=PostGISRaster
+# r.external.out directory="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=final mode=2" format=PostGISRaster
 #
-# r.out.gdal in=final output="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm mode=2" format=GTiff
+# r.out.gdal in=final output="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password mode=2" format=GTiff
 
 # Export data as GTiff then go to ArcGIS to convert to .img file
 # GRASS doesn't have built in functions yet to write data directly to database,
@@ -511,36 +511,36 @@ initGRASS(gisBase = getGRASSpath(grassExecutable),
 
 # Connecting to database
 execGRASS("db.connect", driver="pg", database="gis711_project_5070")
-execGRASS("db.login", user="elyssa", password="omgatcsm", port="5432", flags=c("overwrite"))
+execGRASS("db.login", user="elyssa", password="password", port="5432", flags=c("overwrite"))
 execGRASS("db.connect", flags=c("p"))
 execGRASS("db.tables", flags=c("p"))
 
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept13flood_proj mode=2", output="sept13flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept13flood_proj mode=2", output="sept13flood_resamp")
 execGRASS("r.resample", input="sept13flood_resamp", output="sept13flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept13flood_resamp", output="sept13flood_30m.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept14flood_proj mode=2", output="sept14flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept14flood_proj mode=2", output="sept14flood_resamp")
 execGRASS("r.resample", input="sept14flood_resamp", output="sept14flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept14flood_resamp", output="sept14flood_resamp.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept15flood_proj mode=2", output="sept15flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept15flood_proj mode=2", output="sept15flood_resamp")
 execGRASS("r.resample", input="sept15flood_resamp", output="sept15flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept15flood_resamp", output="sept15flood_resamp.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept16flood_proj mode=2", output="sept16flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept16flood_proj mode=2", output="sept16flood_resamp")
 execGRASS("r.resample", input="sept16flood_resamp", output="sept16flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept16flood_resamp", output="sept16flood_resamp.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept17flood_proj mode=2", output="sept17flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept17flood_proj mode=2", output="sept17flood_resamp")
 execGRASS("r.resample", input="sept17flood_resamp", output="sept17flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept17flood_resamp", output="sept17flood_resamp.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept18flood_proj mode=2", output="sept18flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept18flood_proj mode=2", output="sept18flood_resamp")
 execGRASS("r.resample", input="sept18flood_resamp", output="sept18flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept18flood_resamp", output="sept18flood_resamp.tif", format="GTiff")
 
-execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=omgatcsm table=sept19flood_proj mode=2", output="sept19flood_resamp")
+execGRASS("r.in.gdal", input="PG:dbname=gis711_project_5070 port=5432 user=elyssa password=password table=sept19flood_proj mode=2", output="sept19flood_resamp")
 execGRASS("r.resample", input="sept19flood_resamp", output="sept19flood_resamp", flags=c("overwrite"))
 execGRASS("r.out.gdal", input="sept19flood_resamp", output="sept19flood_resamp.tif", format="GTiff")
 
@@ -574,7 +574,7 @@ library(stringr)
 # install.packages('rpostgis')
 
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, dbname = "gis711_project_5070", user = "elyssa", port = 5432, password = "omgatcsm")
+con <- dbConnect(drv, dbname = "gis711_project_5070", user = "elyssa", port = 5432, password = "password")
 pgPostGIS(con, topology = FALSE, tiger = FALSE, sfcgal = FALSE, display = TRUE, exec = TRUE)
 dbListTables(con)
 # dbDisconnect(con)
